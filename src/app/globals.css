@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fffcf9;
+  --foreground: #1c1917;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-inter: var(--font-inter), sans-serif;
+  --font-cormorant: var(--font-cormorant), serif;
+  --font-playfair: var(--font-playfair), serif;
+  --font-great-vibes: var(--font-great-vibes), cursive;
+  --font-allura: var(--font-allura), cursive;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+

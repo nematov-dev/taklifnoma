@@ -1,11 +1,11 @@
 {
   "invitationLabel": "MAXSUS TAKLIFNOMA",
   "name": "Madina",
-  "quote": "Har bir kun Siz bilan yanada mazmunli bo‘lishiga ishonaman. Birga vaqt o‘tkazsak, men uchun katta baxt bo‘lardi.",
+  "quote": "Har bir soniya siz bilan mazmunli va chiroyli bo‘lishiga ishonaman. Agar siz ham qarshi bo‘lmasangiz, bu kunni birga chiroyli xotiraga aylantirsak ! 😊",
   "question": "Men bilan uchrashishga rozi bo‘lasizmi?",
   "yesButton": "Ha 💕",
   "noButton": "Yo‘q",
-  "locationQuestion": "Ajoyib! 🎉 Qayerga boramiz?",
+  "locationQuestion": "Ajoyib! 🥳 Qayerga boramiz?",
   "locations": [
     "☕ Kafe",
     "🎬 Kino",
@@ -13,12 +13,19 @@
   ],
   "dateQuestion": "Qachon?",
   "dates": [
-    "31 avgust 17:00"
+    "31-avgust 17:00 (Shahrisabz)"
   ],
   "submitButton": "Yuborish 💌",
-  "successTitle": "Uchrashuvimiz belgilandi! 💕",
+  "successTitle": "Rahmat ! Uchrashuvimiz belgilandi! 💕",
   "successMessage": "Sizni ko‘rishni intiqlik bilan kutaman.",
   "senderName": "Saidakbar",
+  "noButtonTexts": [
+    "Yana bir o‘ylab ko‘ring 🥺",
+    "Atigi 1 soat vaqtingizni olaman ☕",
+    "Ha ni bosa qolaylik 💕",
+    "Rostdanmi? 💔",
+    "Keling, 'Ha 💕' tugmasini bosaylik! 🥰"
+  ],
   "accentColor": "#db2777",
   "bgColor": "#fffcf9",
   "fontFamily": "Playfair Display",

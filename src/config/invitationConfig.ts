@@ -24,26 +24,25 @@ export interface InvitationSettings {
 
 export const DEFAULT_SETTINGS: InvitationSettings = {
   invitationLabel: "MAXSUS TAKLIFNOMA",
-  name: "Sevinch",
-  quote: "Har bir kun Siz bilan yanada mazmunli bo‘lishiga ishonaman. Birga vaqt o‘tkazsak, men uchun katta baxt bo‘lardi.",
+  name: "Madina",
+  quote: "Har bir soniya siz bilan mazmunli va chiroyli bo‘lishiga ishonaman. Agar siz ham qarshi bo‘lmasangiz, bu kunni birga chiroyli xotiraga aylantirsak ! 😊",
   question: "Men bilan uchrashishga rozi bo‘lasizmi?",
   yesButton: "Ha 💕",
   noButton: "Yo‘q",
-  locationQuestion: "Giyovib! 🎉 Qayerga boramiz?",
+  locationQuestion: "Ajoyib! 🥳 Qayerga boramiz?",
   locations: [
     "☕ Kafe",
-    "🍽 Restoran",
-    "🎬 Kino"
+    "🎬 Kino",
+    "✨ Sayr"
   ],
   dateQuestion: "Qachon?",
   dates: [
-    "Shanba, 18:00",
-    "Yakshanba, 16:00"
+    "31-avgust 17:00 (Shahrisabz)"
   ],
   submitButton: "Yuborish 💌",
-  successTitle: "Uchrashuvimiz belgilandi! 💕",
+  successTitle: "Rahmat ! Uchrashuvimiz belgilandi! 💕",
   successMessage: "Sizni ko‘rishni intiqlik bilan kutaman.",
-  senderName: "Ahror",
+  senderName: "Saidakbar",
   noButtonTexts: [
     "Yana bir o‘ylab ko‘ring 🥺",
     "Atigi 1 soat vaqtingizni olaman ☕",

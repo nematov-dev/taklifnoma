@@ -114,3 +114,39 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
+
+export async function DELETE(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+
+  if (!id) {
+    return NextResponse.json({ error: 'Missing RSVP id' }, { status: 400 });
+  }
+
+  // 1. Delete from local filesystem cache
+  try {
+    const responses = await getLocalResponses();
+    const updated = responses.filter((r: any) => r.id !== id);
+    await fs.writeFile(RESPONSES_FILE, JSON.stringify(updated, null, 2), 'utf-8');
+  } catch (e) {
+    console.error("Local file delete error:", e);
+  }
+
+  // 2. Delete from Supabase (skip local-only string IDs to avoid Postgres UUID cast errors)
+  if (supabase && !id.startsWith('local_')) {
+    try {
+      const { error } = await supabase
+        .from('invitation_responses')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+      }
+    } catch (err: any) {
+      return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+  }
+
+  return NextResponse.json({ success: true });
+}

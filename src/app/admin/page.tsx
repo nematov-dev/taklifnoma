@@ -231,6 +231,24 @@ export default function AdminPage() {
     setNewNoText('');
   };
 
+  const handleDeleteRsvp = async (id: string) => {
+    if (!confirm("Haqiqatan ham ushbu javobni o‘chirmoqchimisiz?")) return;
+    
+    try {
+      const response = await fetch(`/api/rsvp?id=${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Javobni o‘chirib bo‘lmadi');
+      }
+
+      loadInviteData();
+    } catch (err: any) {
+      alert(err.message);
+    }
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen w-full bg-[#fbf9f6] flex flex-col justify-center items-center p-4">
@@ -788,6 +806,7 @@ export default function AdminPage() {
                         <th className="py-3 px-2">Joy (Qayerga)</th>
                         <th className="py-3 px-2">Vaqt (Qachon)</th>
                         <th className="py-3 px-2">Kutib olingan vaqt</th>
+                        <th className="py-3 px-2 text-right">Amallar</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-stone-100">
@@ -803,6 +822,15 @@ export default function AdminPage() {
                               hour: '2-digit',
                               minute: '2-digit'
                             })}
+                          </td>
+                          <td className="py-3.5 px-2 text-right">
+                            <button
+                              onClick={() => handleDeleteRsvp(rsvp.id)}
+                              className="p-1 text-stone-400 hover:text-red-650 hover:bg-red-50 rounded-lg transition-colors cursor-pointer inline-flex items-center justify-center"
+                              title="Javobni o‘chirish"
+                            >
+                              <Trash2 size={15} className="hover:text-red-600" />
+                            </button>
                           </td>
                         </tr>
                       ))}

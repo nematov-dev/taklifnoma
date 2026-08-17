@@ -3,8 +3,13 @@ import { supabase } from '@/utils/supabase';
 import { DEFAULT_SETTINGS } from '@/config/invitationConfig';
 import fs from 'fs/promises';
 import path from 'path';
+import os from 'os';
 
-const SETTINGS_DIR = path.join(process.cwd(), 'src/data/settings');
+// Determine storage path: /tmp on Vercel, src/data locally
+const useTmp = !!process.env.VERCEL;
+const SETTINGS_DIR = useTmp 
+  ? path.join(os.tmpdir(), 'taklifnoma-settings')
+  : path.join(process.cwd(), 'src/data/settings');
 
 // Helper to load settings from filesystem
 async function getLocalSettings(id: string) {
@@ -78,7 +83,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing id or settings' }, { status: 400 });
     }
 
-    // Always save to filesystem as server-side backup
+    // Always save to filesystem as server-side backup (ignores read-only errors)
     await saveLocalSettings(id, settings);
 
     if (!supabase) {

@@ -2,8 +2,13 @@ import { NextResponse } from 'next/server';
 import { supabase } from '@/utils/supabase';
 import fs from 'fs/promises';
 import path from 'path';
+import os from 'os';
 
-const RESPONSES_FILE = path.join(process.cwd(), 'src/data/responses.json');
+// Determine storage path: /tmp on Vercel, src/data locally
+const useTmp = !!process.env.VERCEL;
+const RESPONSES_FILE = useTmp
+  ? path.join(os.tmpdir(), 'taklifnoma-responses.json')
+  : path.join(process.cwd(), 'src/data/responses.json');
 
 // Helper to load RSVPs from filesystem
 async function getLocalResponses() {

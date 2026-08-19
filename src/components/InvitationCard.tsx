@@ -95,6 +95,12 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
   };
 
   const handleNoButtonAction = () => {
+    // If the button has already transformed into the Yes button, do not runaway!
+    if (noCount >= 8) {
+      handleYes();
+      return;
+    }
+
     const dialogTexts = settings.noButtonTexts && settings.noButtonTexts.length > 0
       ? settings.noButtonTexts
       : [
@@ -102,7 +108,22 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
           "Atigi 1 soat vaqtingizni olaman ☕",
           "Ha ni bosa qolaylik 💕",
           "Rostdanmi? 💔",
-          "Keling, 'Ha 💕' tugmasini bosaylik! 🥰"
+          "Menga rad javobini berish osonmi? 🥺",
+          "Yuragimni parchalayapsiz 😭",
+          "Rostdan ham bormaysizmi? 🥀",
+          "Bitta shirinlik olib beraman! 🧁",
+          "Meni xafa qilmang 🥺",
+          "Uchrashsak ajoyib bo‘ladi-da ✨",
+          "Keyin afsuslanib yurmang 😜",
+          "Ha ni bosishingizni bilaman! 🥰",
+          "Keling, 'Ha 💕' deb qo‘yaqoling 🙏",
+          "Bir marta, iltimos 🥺",
+          "Faqat bir chashka kofe uchun ☕",
+          "Kino tomosha qilamiz 🎬",
+          "Va’da beraman, zerikmaysiz! ✨",
+          "Yo‘q tugmasi charchadi 😜",
+          "Nega unchalik bag‘ritoshsiz? 💔",
+          "Ha degin iltimos 🥺"
         ];
 
     // Spawn particles near the button before it jumps
@@ -127,9 +148,14 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
     if (Math.abs(newX) < 40) newX = newX > 0 ? 55 : -55;
     if (Math.abs(newY) < 30) newY = newY > 0 ? 45 : -45;
 
-    setNoOffset({ x: newX, y: newY });
     const nextCount = noCount + 1;
     setNoCount(nextCount);
+
+    if (nextCount >= 8) {
+      setNoOffset({ x: 0, y: 0 });
+    } else {
+      setNoOffset({ x: newX, y: newY });
+    }
 
     // Dynamic funny text (cycle or stay at last item)
     const textIndex = Math.min(nextCount - 1, dialogTexts.length - 1);
@@ -266,13 +292,27 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
                   — {settings.invitationLabel} —
                 </span>
 
-                {/* Name heading */}
-                <h1 
-                  className={`mb-4 select-text leading-normal tracking-wide py-1 ${cursiveTitleClass}`}
-                  style={{ color: settings.accentColor }}
+                {/* Name heading with floating/swaying animation and small suffix "ga" */}
+                <motion.div 
+                  className="flex items-baseline gap-1 mb-4 select-text leading-normal tracking-wide"
+                  animate={{ 
+                    y: [0, -6, 0],
+                    rotate: [-1.5, 1.5, -1.5]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
                 >
-                  {settings.name}
-                </h1>
+                  <span 
+                    className={`py-1 ${cursiveTitleClass}`}
+                    style={{ color: settings.accentColor }}
+                  >
+                    {settings.name}
+                  </span>
+                  <span className="text-sm font-serif text-stone-400 tracking-wider italic font-medium">ga</span>
+                </motion.div>
 
                 {/* Heart line separator */}
                 <div className="flex items-center w-full max-w-[120px] justify-between mb-8">
@@ -281,17 +321,17 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
                   <div className="h-[0.5px] bg-stone-200/90 w-10"></div>
                 </div>
 
-                {/* Quote card */}
+                {/* Quote card with bold quote text */}
                 <div 
-                  className="relative rounded-2xl px-6 py-7 mb-8 italic text-stone-600 font-light leading-relaxed text-sm shadow-sm w-full border"
+                  className="relative rounded-2xl px-6 py-7 mb-8 text-stone-900 font-bold leading-relaxed text-sm shadow-sm w-full border"
                   style={{ 
                     backgroundColor: `${settings.accentColor}08`, 
-                    borderColor: `${settings.accentColor}12`
+                    borderColor: `${settings.accentColor}18`
                   }}
                 >
                   {/* Styled quotation marks */}
-                  <span className="absolute top-2 left-3 text-4xl font-serif text-pink-300/60 pointer-events-none select-none">“</span>
-                  <p className="px-3 font-sans not-italic text-stone-600/90 tracking-wide">
+                  <span className="absolute top-2 left-3 text-4xl font-serif text-pink-300/80 pointer-events-none select-none">“</span>
+                  <p className="px-3 font-sans not-italic text-stone-850 font-bold tracking-wide text-center">
                     {settings.quote}
                   </p>
                 </div>
@@ -314,16 +354,16 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
                         initial={{ opacity: 0, scale: 0.8, y: 10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.8 }}
-                        className="absolute -top-12 right-2 text-xs font-semibold px-4 py-2 rounded-2xl shadow-md border flex items-center gap-1.5 z-20"
+                        className="absolute -top-12 right-2 text-sm sm:text-base font-bold px-5 py-2.5 rounded-2xl shadow-lg border flex items-center gap-1.5 z-20"
                         style={{ 
-                          borderColor: `${settings.accentColor}20`, 
+                          borderColor: `${settings.accentColor}30`, 
                           backgroundColor: 'white', 
                           color: settings.accentColor,
-                          boxShadow: '0 8px 24px -6px rgba(219, 39, 119, 0.15)'
+                          boxShadow: '0 10px 30px -8px rgba(219, 39, 119, 0.2)'
                         }}
                       >
                         <span>{noTooltip}</span>
-                        <span className="absolute bottom-[-6px] right-8 w-3 h-3 bg-white border-r border-b rotate-45" style={{ borderColor: `transparent ${settings.accentColor}20 ${settings.accentColor}20 transparent` }}></span>
+                        <span className="absolute bottom-[-6px] right-8 w-3 h-3 bg-white border-r border-b rotate-45" style={{ borderColor: `transparent ${settings.accentColor}30 ${settings.accentColor}30 transparent` }}></span>
                       </motion.div>
                     )}
 
@@ -331,13 +371,13 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
                     {noParticles.map((p) => (
                       <motion.div
                         key={p.id}
-                        className="absolute text-xs font-semibold select-none pointer-events-none z-30 bg-white/95 px-2.5 py-1 rounded-full border shadow-md flex items-center justify-center whitespace-nowrap"
+                        className="absolute text-sm sm:text-base font-bold select-none pointer-events-none z-30 bg-white/95 px-3 py-1.5 rounded-full border shadow-md flex items-center justify-center whitespace-nowrap"
                         style={{
                           left: `calc(50% + ${p.x}px)`,
                           top: `calc(50% + ${p.y}px)`,
-                          borderColor: `${settings.accentColor}20`,
+                          borderColor: `${settings.accentColor}30`,
                           color: settings.accentColor,
-                          boxShadow: '0 4px 12px -3px rgba(219, 39, 119, 0.1)'
+                          boxShadow: '0 6px 16px -4px rgba(219, 39, 119, 0.15)'
                         }}
                         initial={{ opacity: 1, scale: 0 }}
                         animate={{
@@ -374,28 +414,46 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
                     {settings.yesButton}
                   </motion.button>
 
-                  {/* Runaway No button */}
+                  {/* Runaway No button / Transformed Yes button */}
                   <motion.button
-                    animate={noOffset}
-                    onMouseEnter={handleNoButtonAction}
-                    onTouchStart={(e) => {
+                    animate={noCount >= 8 ? { scale: [1, 1.04, 1, 1.04, 1] } : noOffset}
+                    transition={noCount >= 8 ? {
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    } : undefined}
+                    onMouseEnter={noCount >= 8 ? undefined : handleNoButtonAction}
+                    onTouchStart={noCount >= 8 ? undefined : (e) => {
                       e.preventDefault();
                       handleNoButtonAction();
                     }}
-                    onClick={handleNoButtonAction}
-                    className={`flex-1 py-3 px-6 border border-stone-200 bg-white text-stone-500 font-medium hover:bg-stone-50 transition-shadow text-sm cursor-pointer ${getButtonStyle()}`}
+                    onClick={noCount >= 8 ? handleYes : handleNoButtonAction}
+                    className={`flex-1 py-3 px-6 text-sm font-semibold transition-all cursor-pointer ${getButtonStyle()} ${
+                      noCount >= 8 
+                        ? 'text-white shadow-md hover:shadow-lg' 
+                        : 'border border-stone-200 bg-white text-stone-500 hover:bg-stone-50'
+                    }`}
+                    style={noCount >= 8 ? { 
+                      background: `linear-gradient(135deg, ${settings.accentColor}, #d946ef)`
+                    } : undefined}
                   >
-                    {settings.noButton}
+                    {noCount >= 8 ? settings.yesButton : settings.noButton}
                   </motion.button>
                 </div>
 
-                {/* Sender Name */}
-                <span 
-                  className={`mt-8 text-sm opacity-80 ${cursiveSignatureClass}`}
-                  style={{ color: settings.accentColor }}
-                >
-                  — {settings.senderName}
-                </span>
+                {/* Sender Name with small heart and suffix "dan" */}
+                <div className="mt-8 flex flex-col items-center gap-1.5">
+                  <Heart size={14} className="fill-current animate-pulse text-stone-300" style={{ color: `${settings.accentColor}80` }} />
+                  <div className="flex items-baseline gap-1">
+                    <span 
+                      className={cursiveSignatureClass} 
+                      style={{ color: settings.accentColor, fontSize: '1.25rem' }}
+                    >
+                      {settings.senderName}
+                    </span>
+                    <span className="text-xs font-serif text-stone-400 tracking-wider italic font-medium">dan</span>
+                  </div>
+                </div>
               </motion.div>
             )}
 

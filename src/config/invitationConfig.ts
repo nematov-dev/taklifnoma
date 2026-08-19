@@ -48,7 +48,22 @@ export const DEFAULT_SETTINGS: InvitationSettings = {
     "Atigi 1 soat vaqtingizni olaman ☕",
     "Ha ni bosa qolaylik 💕",
     "Rostdanmi? 💔",
-    "Keling, 'Ha 💕' tugmasini bosaylik! 🥰"
+    "Menga rad javobini berish osonmi? 🥺",
+    "Yuragimni parchalayapsiz 😭",
+    "Rostdan ham bormaysizmi? 🥀",
+    "Bitta shirinlik olib beraman! 🧁",
+    "Meni xafa qilmang 🥺",
+    "Uchrashsak ajoyib bo‘ladi-da ✨",
+    "Keyin afsuslanib yurmang 😜",
+    "Ha ni bosishingizni bilaman! 🥰",
+    "Keling, 'Ha 💕' deb qo‘yaqoling 🙏",
+    "Bir marta, iltimos 🥺",
+    "Faqat bir chashka kofe uchun ☕",
+    "Kino tomosha qilamiz 🎬",
+    "Va’da beraman, zerikmaysiz! ✨",
+    "Yo‘q tugmasi charchadi 😜",
+    "Nega unchalik bag‘ritoshsiz? 💔",
+    "Ha degin iltimos 🥺"
   ],
   
   // Default styling configurations

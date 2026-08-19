@@ -54,7 +54,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
       setShowNotification(true);
       const timer = setTimeout(() => {
         setShowNotification(false);
-      }, 8000);
+      }, 12000);
       return () => clearTimeout(timer);
     }
   }, [noCount]);
@@ -625,7 +625,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
             </div>
             <div className="flex-1 min-w-0">
               <h4 className="text-[10px] font-semibold text-stone-400 uppercase tracking-wider">
-                Maxsus bildirishnoma
+                Bildirishnoma
               </h4>
               <p className="text-sm font-extrabold text-stone-850 truncate mt-0.5">
                 {settings.name} ga 💖

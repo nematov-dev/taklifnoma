@@ -23,7 +23,7 @@ export interface InvitationSettings {
 }
 
 export const DEFAULT_SETTINGS: InvitationSettings = {
-  invitationLabel: "MAXSUS TAKLIFNOMA",
+  invitationLabel: "TAKLIFNOMA",
   name: "Madina",
   quote: "Har bir soniya siz bilan mazmunli va chiroyli bo‘lishiga ishonaman. Agar siz ham qarshi bo‘lmasangiz, bu kunni birga chiroyli xotiraga aylantirsak ! 😊",
   question: "Men bilan uchrashishga rozi bo‘lasizmi?",

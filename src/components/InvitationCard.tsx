@@ -54,7 +54,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
       setShowNotification(true);
       const timer = setTimeout(() => {
         setShowNotification(false);
-      }, 3500);
+      }, 8000);
       return () => clearTimeout(timer);
     }
   }, [noCount]);
@@ -170,7 +170,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
 
     // Dynamic funny text (cycle or stay at last item)
     if (nextCount >= 20) {
-      setNoTooltip("Endi qayoqqa qochasiz? 😅");
+      setNoTooltip("");
     } else {
       const textIndex = Math.min(nextCount - 1, dialogTexts.length - 1);
       setNoTooltip(dialogTexts[textIndex] || "Iltimos 🥺");

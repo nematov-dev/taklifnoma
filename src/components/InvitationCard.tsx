@@ -148,16 +148,16 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
     }));
     setNoParticles(prev => [...prev, ...newParticles].slice(-25));
 
-    // Runaway effect within boundaries
-    const rangeX = window.innerWidth > 500 ? 120 : 80;
-    const rangeY = window.innerHeight > 800 ? 80 : 50;
+    // Runaway effect within safe boundaries (prevents overlapping question or signature text)
+    const rangeX = window.innerWidth > 500 ? 130 : 90;
+    const rangeY = 22; // Restricted vertical range to keep it in the buttons area
     
     let newX = (Math.random() - 0.5) * rangeX * 2;
     let newY = (Math.random() - 0.5) * rangeY * 2;
     
     // Minimum move distance to make sure it jumps noticeably
-    if (Math.abs(newX) < 40) newX = newX > 0 ? 55 : -55;
-    if (Math.abs(newY) < 30) newY = newY > 0 ? 45 : -45;
+    if (Math.abs(newX) < 45) newX = newX > 0 ? 60 : -60;
+    if (Math.abs(newY) < 10) newY = newY > 0 ? 12 : -12;
 
     const nextCount = noCount + 1;
     setNoCount(nextCount);

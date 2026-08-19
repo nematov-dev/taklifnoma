@@ -432,7 +432,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
 
                   {/* Runaway No button / Transformed Yes button */}
                   <motion.button
-                    animate={noCount >= 20 ? { scale: [1, 1.04, 1, 1.04, 1] } : noOffset}
+                    animate={noCount >= 20 ? { x: 0, y: 0, scale: [1, 1.04, 1, 1.04, 1] } : noOffset}
                     transition={noCount >= 20 ? {
                       duration: 1.5,
                       repeat: Infinity,

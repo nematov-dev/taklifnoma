@@ -323,10 +323,10 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
 
                 {/* Quote card with bold quote text */}
                 <div 
-                  className="relative rounded-2xl px-6 py-7 mb-8 text-stone-900 font-bold leading-relaxed text-sm shadow-sm w-full border"
+                  className="relative rounded-2xl px-6 py-7 mb-8 text-stone-900 font-bold leading-relaxed text-sm shadow-[0_8px_30px_rgb(0,0,0,0.02)] w-full border border-pink-100"
                   style={{ 
-                    backgroundColor: `${settings.accentColor}08`, 
-                    borderColor: `${settings.accentColor}18`
+                    backgroundColor: `${settings.accentColor}0e`, 
+                    borderColor: `${settings.accentColor}35`
                   }}
                 >
                   {/* Styled quotation marks */}

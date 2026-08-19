@@ -251,10 +251,11 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
         ))}
       </div>
 
-      {/* Main card container */}
+      {/* Main card container with thin visible accent border */}
       <div className="w-full max-w-[430px] relative z-10">
         <div 
-          className="bg-white/85 backdrop-blur-lg rounded-[32px] px-6 py-10 border border-white/60 shadow-[0_24px_50px_-15px_rgba(219,39,119,0.12)] relative flex flex-col"
+          className="bg-white/93 backdrop-blur-lg rounded-[32px] px-6 py-10 border shadow-[0_24px_55px_-10px_rgba(219,39,119,0.14)] relative flex flex-col"
+          style={{ borderColor: `${settings.accentColor}25` }}
         >
           {/* Sparkles decoration */}
           <div className="absolute top-6 right-6 text-pink-300 pointer-events-none animate-pulse">

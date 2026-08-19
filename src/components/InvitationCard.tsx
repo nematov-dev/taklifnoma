@@ -35,6 +35,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
 
   // Background floating hearts
   const [risingHearts, setRisingHearts] = useState<{ id: number; left: number; size: number; delay: number; duration: number }[]>([]);
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     // Generate a set of rising hearts
@@ -47,6 +48,16 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
     }));
     setRisingHearts(hearts);
   }, []);
+
+  useEffect(() => {
+    if (noCount >= 20) {
+      setShowNotification(true);
+      const timer = setTimeout(() => {
+        setShowNotification(false);
+      }, 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [noCount]);
 
   const getFontFamilyClass = (font: string) => {
     switch (font) {
@@ -96,7 +107,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
 
   const handleNoButtonAction = () => {
     // If the button has already transformed into the Yes button, do not runaway!
-    if (noCount >= 8) {
+    if (noCount >= 20) {
       handleYes();
       return;
     }
@@ -104,26 +115,26 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
     const dialogTexts = settings.noButtonTexts && settings.noButtonTexts.length > 0
       ? settings.noButtonTexts
       : [
-          "Yana bir o‘ylab ko‘ring 🥺",
-          "Atigi 1 soat vaqtingizni olaman ☕",
-          "Ha ni bosa qolaylik 💕",
-          "Rostdanmi? 💔",
-          "Menga rad javobini berish osonmi? 🥺",
-          "Yuragimni parchalayapsiz 😭",
-          "Rostdan ham bormaysizmi? 🥀",
-          "Bitta shirinlik olib beraman! 🧁",
-          "Meni xafa qilmang 🥺",
-          "Uchrashsak ajoyib bo‘ladi-da ✨",
-          "Keyin afsuslanib yurmang 😜",
-          "Ha ni bosishingizni bilaman! 🥰",
-          "Keling, 'Ha 💕' deb qo‘yaqoling 🙏",
-          "Bir marta, iltimos 🥺",
-          "Faqat bir chashka kofe uchun ☕",
-          "Kino tomosha qilamiz 🎬",
-          "Va’da beraman, zerikmaysiz! ✨",
-          "Yo‘q tugmasi charchadi 😜",
-          "Nega unchalik bag‘ritoshsiz? 💔",
-          "Ha degin iltimos 🥺"
+          "Yana bir bor o'ylab ko'ring! 😃",
+          "Atigi 1 soat vaqtingizni olaman, xolos!",
+          "Shunchaki \"Ha\"ni bosing, pushaymon bo'lmaysiz! 😉",
+          "Yo'q deb aytishga baribir yo'l qo'ymayman!",
+          "Baribir qochib qutula olmaysiz! 😜",
+          "Bitta kofe ichamiz, xolos, rozi bo'la qoling!",
+          "Bu tugma baribir ishlamaydi!",
+          "Qanchalik harakat qilmang, \"Ha\"ni bosasiz!",
+          "Rostdan ham rad etmoqchimisiz? 🥺",
+          "Axir juda zo'r vaqt o'tkazamiz!",
+          "Bitta imkoniyat bering! ✨",
+          "Taqdiringizdan qochib qutula olmaysiz!",
+          "Shu tugmani ushlab ko'ring-chi? 🏃‍♂️",
+          "\"Yo'q\" degan javob qabul qilinmaydi!",
+          "Baribir taslim bo'lasiz!",
+          "\"Ha\" tugmasi ancha chiroyli ko'rinyapti, to'g'rimi?",
+          "O'zingizni qiynamay, yashil tugmani bosing! 😊",
+          "Yomon niyatim yo'q, shunchaki ko'rishaylik!",
+          "Bu tugmani bosish uchun juda tez bo'lishingiz kerak!",
+          "Baribir \"Ha\" deyishingizni bilardim! ❤️"
         ];
 
     // Spawn particles near the button before it jumps
@@ -151,15 +162,19 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
     const nextCount = noCount + 1;
     setNoCount(nextCount);
 
-    if (nextCount >= 8) {
+    if (nextCount >= 20) {
       setNoOffset({ x: 0, y: 0 });
     } else {
       setNoOffset({ x: newX, y: newY });
     }
 
     // Dynamic funny text (cycle or stay at last item)
-    const textIndex = Math.min(nextCount - 1, dialogTexts.length - 1);
-    setNoTooltip(dialogTexts[textIndex] || "Iltimos 🥺");
+    if (nextCount >= 20) {
+      setNoTooltip("Endi qayoqqa qochasiz? 😅");
+    } else {
+      const textIndex = Math.min(nextCount - 1, dialogTexts.length - 1);
+      setNoTooltip(dialogTexts[textIndex] || "Iltimos 🥺");
+    }
   };
 
   const handleYes = () => {
@@ -417,28 +432,28 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
 
                   {/* Runaway No button / Transformed Yes button */}
                   <motion.button
-                    animate={noCount >= 8 ? { scale: [1, 1.04, 1, 1.04, 1] } : noOffset}
-                    transition={noCount >= 8 ? {
+                    animate={noCount >= 20 ? { scale: [1, 1.04, 1, 1.04, 1] } : noOffset}
+                    transition={noCount >= 20 ? {
                       duration: 1.5,
                       repeat: Infinity,
                       ease: "easeInOut"
                     } : undefined}
-                    onMouseEnter={noCount >= 8 ? undefined : handleNoButtonAction}
-                    onTouchStart={noCount >= 8 ? undefined : (e) => {
+                    onMouseEnter={noCount >= 20 ? undefined : handleNoButtonAction}
+                    onTouchStart={noCount >= 20 ? undefined : (e) => {
                       e.preventDefault();
                       handleNoButtonAction();
                     }}
-                    onClick={noCount >= 8 ? handleYes : handleNoButtonAction}
+                    onClick={noCount >= 20 ? handleYes : handleNoButtonAction}
                     className={`flex-1 py-3 px-6 text-sm font-semibold transition-all cursor-pointer ${getButtonStyle()} ${
-                      noCount >= 8 
+                      noCount >= 20 
                         ? 'text-white shadow-md hover:shadow-lg' 
                         : 'border border-stone-200 bg-white text-stone-500 hover:bg-stone-50'
                     }`}
-                    style={noCount >= 8 ? { 
+                    style={noCount >= 20 ? { 
                       background: `linear-gradient(135deg, ${settings.accentColor}, #d946ef)`
                     } : undefined}
                   >
-                    {noCount >= 8 ? settings.yesButton : settings.noButton}
+                    {noCount >= 20 ? settings.yesButton : settings.noButton}
                   </motion.button>
                 </div>
 
@@ -590,6 +605,38 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Floating iOS-style notification toast */}
+      <AnimatePresence>
+        {showNotification && (
+          <motion.div
+            initial={{ y: -120, opacity: 0, scale: 0.9 }}
+            animate={{ y: 24, opacity: 1, scale: 1 }}
+            exit={{ y: -120, opacity: 0, scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-[360px] bg-white/95 backdrop-blur-md border rounded-2xl px-4 py-3.5 shadow-[0_12px_36px_-6px_rgba(219,39,119,0.18)] flex items-center gap-3.5"
+            style={{ borderColor: `${settings.accentColor}30` }}
+          >
+            <div 
+              className="w-10 h-10 rounded-full flex items-center justify-center text-white shrink-0 shadow-sm animate-bounce"
+              style={{ background: `linear-gradient(135deg, ${settings.accentColor}, #d946ef)` }}
+            >
+              <Heart size={18} className="fill-current text-white animate-pulse" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h4 className="text-[10px] font-semibold text-stone-400 uppercase tracking-wider">
+                Maxsus bildirishnoma
+              </h4>
+              <p className="text-sm font-extrabold text-stone-850 truncate mt-0.5">
+                {settings.name} ga 💖
+              </p>
+              <p className="text-xs font-semibold text-stone-600 mt-0.5">
+                Endi qayoqqa qochasiz? 😅
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

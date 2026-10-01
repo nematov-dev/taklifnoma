@@ -37,7 +37,7 @@ export const DEFAULT_SETTINGS: InvitationSettings = {
   ],
   dateQuestion: "Qachon?",
   dates: [
-    "31-avgust 17:00 (Shahrisabz)"
+    "10-oktyabr 17:00"
   ],
   submitButton: "Yuborish 💌",
   successTitle: "Rahmat ! Uchrashuvimiz belgilandi! 💕",
